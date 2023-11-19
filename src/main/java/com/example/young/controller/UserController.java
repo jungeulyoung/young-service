@@ -2,6 +2,7 @@ package com.example.young.controller;
 
 import com.example.young.model.User;
 import com.example.young.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,10 +18,10 @@ public class UserController {
 
     private final UserService userService;
 
+    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
 
     @CrossOrigin(origins = "http://localhost:3000/")
     @GetMapping("/hello")

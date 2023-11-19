@@ -5,13 +5,19 @@ import com.example.young.repository.MemoryUserRepository;
 import com.example.young.repository.UserRepository;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@Transactional
 public class UserService {
 
-    private final UserRepository userRepository = new MemoryUserRepository();
+    private final UserRepository userRepository;
 
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     /**
      * 회원 가입
@@ -22,7 +28,6 @@ public class UserService {
     public Long join(User user) {
         // 같은 이름이 있는 중복 회원X
         validateDuplicateUser(user); //중복회원 검증
-
         userRepository.save(user);
         return user.getId();
     }
