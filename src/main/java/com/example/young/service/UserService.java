@@ -26,10 +26,14 @@ public class UserService {
      * @return long
      */
     public Long join(User user) {
-        // 같은 이름이 있는 중복 회원X
-        validateDuplicateUser(user); //중복회원 검증
-        userRepository.save(user);
-        return user.getId();
+
+        long start = System.currentTimeMillis();
+
+            // 같은 이름이 있는 중복 회원X
+            validateDuplicateUser(user); //중복회원 검증
+            userRepository.save(user);
+            return user.getId();
+
     }
 
 
@@ -46,9 +50,9 @@ public class UserService {
      * @return
      */
     public List<User> findUsers() {
-        return userRepository.findAll();
+            return userRepository.findAll();
     }
-
+    
     public Optional<User> fineOne(long userId) {
         return userRepository.findById(userId);
     }
